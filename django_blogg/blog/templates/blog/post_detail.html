@@ -1,0 +1,40 @@
+
+{% extends "blog/padre.html" %}
+{% block content %}
+  <article class="media content-section">
+    <img class="rounded-circle article-img" src="{{ post.user.avatar.imagen.url }}">
+    <div class="media-body">
+      <div class="article-metadata">
+        <p class="mr-2" >{{ object.user }}</p>
+        <small class="text-muted">{{ object.fecha|date:"F d, Y" }}</small>
+        <h4 class="article-title">{{ object.titulo }}</h4>
+        <p class="article-content">{{ object.contenido }}</p>
+        <div>
+              <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'post-coment' object.id %}">Comentar</a>
+            {% if object.user == user %}    
+              <a class="btn btn-primary btn-sm mt-1 mb-1" href="{% url 'post-modificar' object.id %}">Modificar</a>
+              <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete' object.id %}">Eliminar</a>
+            {% endif %}
+          </div>
+      </div>    
+    </div>
+    <div class="media-body">
+      <article class="media content-section">
+        {% for comentario in comentarios %}
+          <article class="media content-section">
+            <img class="rounded-circle article-img" src="{{ comentario.user.avatar.imagen.url }}">
+            <small class="text-muted">  {{ comentario.user }} / {{ comentario.fechc }}</small>
+            <p class="article-content">{{ comentario.contc }}</p>
+            {% if comentario.user == user %}    
+              <a class="btn btn-primary btn-sm mt-1 mb-1" href="{% url 'comentario-modifc' comentario.id %}">Modificar</a>
+              <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'comentario-delete' comentario.id %}">Eliminar</a>
+            {% endif %}
+          </article>
+          {% endfor %}
+        </div>
+    </div>
+    </article>
+
+
+  </article>
+{% endblock content %}

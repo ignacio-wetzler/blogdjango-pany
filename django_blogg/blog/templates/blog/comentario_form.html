@@ -1,0 +1,31 @@
+
+{% extends "blog/padre.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<article class="media content-section">
+  <img class="rounded-circle article-img" src="{{ user.avatar.imagen.url }}">
+  <div class="media-body">
+    <div class="article-metadata">
+      <a class="mr-2" href="#">{{ extra }}</a>
+      <small class="text-muted">{{ fecha|date:"F d, Y" }}</small>
+      <h2 class="article-title">{{ titulo }}</h2>
+      <p class="article-content">{{ contenido }}</p>
+    </div>
+    <h2 class="article-title">{{ object.titulo }}</h2>
+    <p class="article-content">{{ object.contenido }}</p>
+  </div>
+</article>
+    <div class="content-section">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4"> Comentario</legend>
+                {{ form|crispy }}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit"> Comentar</button>
+            </div>
+        </form>
+    </div>
+{% endblock content %}
+

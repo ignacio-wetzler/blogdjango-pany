@@ -1,0 +1,14 @@
+{% extends "./padre.html" %}
+{% block content %}
+    {% for post in posts%}
+        <article class="media content-section">
+            <img class="rounded-circle article-img" src="{{ post.user.avatar.imagen.url }}">
+            <div class="media-body">
+                <p class="mr-2"> {{post.user}} </p>
+                <small class="text-muted">{{ post.fecha|date:"F d, Y" }}</small>
+                <h4><a class="article-title" href= "{% url 'post-detail' post.id %}">{{ post.titulo }}</a></h4>
+                <p class="article-content">{{ post.contenido }}</p>
+            </div>
+        </article>
+    {% endfor %}
+{% endblock content %}

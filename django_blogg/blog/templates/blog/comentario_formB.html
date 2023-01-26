@@ -1,0 +1,40 @@
+
+{% extends "blog/padre.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<article class="media content-section">
+  <img class="rounded-circle article-img" src="{{ post.autor.avatar.imagen.url }}">
+  <div class="media-body">
+    <div class="article-metadata">
+      <a class="mr-2" href="#">{{ post.extra }}</a>
+      <small class="text-muted">{{ post.fecha|date:"F d, Y" }}</small>
+      <h2 class="article-title">{{ post.titulo }}</h2>
+      <p class="article-content">{{ post.contenido }}</p>
+      
+      
+      {% if object.autor == user %}
+        <div>
+          <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'post-modificar' object.id %}">Modificar</a>
+          <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete' object.id %}">Eliminar</a>
+        </div>
+      {% endif %}
+    </div>
+    <h2 class="article-title">{{ object.titulo }}</h2>
+    <p class="article-content">{{ object.contenido }}</p>
+  </div>
+</article>
+    <div class="content-section">
+        <form method="POST" action ="#">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4"> Crear Post</legend>
+                {{ form|crispy }}
+            </fieldset>
+            <div class="form-group">
+              <input type = "textarea", rows="5" cols="60", name = new>
+              <button class="btn btn-outline-info" type="submit"> Post</button>
+            </div>
+        </form>
+    </div>
+{% endblock content %}
+

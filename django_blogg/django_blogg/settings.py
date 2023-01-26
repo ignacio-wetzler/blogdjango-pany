@@ -133,4 +133,4 @@ MEDIA_URL = '/media/'
 STATIC_ROOT = '/home/iwetzler/django_blogg/static'
 STATIC_URL = '/static/'
 LOGIN_REDIRECT_URL = "/"
-
+LOGIN_URL = "login"
